@@ -7,3 +7,5 @@ Other users who have completed the challenge can look over your code and nit-pic
 It's a great tool for learning iterative design techniques and to practice refactoring.
 
 Check out [this page](http://exercism.io/getting-started) if you're interested in getting started with exericsm, I definitely recommend it.
+
+THIS LINE IS A TEST LOLZ
