@@ -19,6 +19,7 @@ public:
 #include <regex>
 #include <string>
 #include <algorithm>
+#include <boost/algorithm/string/trim.hpp>
 using namespace std;
 
 bool no_lowercase_chars_in(const string& input) {
@@ -32,9 +33,13 @@ bool any_alpha_chars_in(const string& input) {
 }
 
 string bob::hey(string input) {
-    if (no_lowercase_chars_in(input) && any_alpha_chars_in(input))
+    string stripped_input = boost::trim_copy(input);
+    if (stripped_input.empty()) {
+        return "Fine. Be that way!";
+    } else if (no_lowercase_chars_in(stripped_input) && 
+               any_alpha_chars_in(stripped_input))
         return "Whoa, chill out!";
-    else if (input.back() == '?')
+    else if (stripped_input.back() == '?')
         return "Sure.";
     return "Whatever.";
 }
