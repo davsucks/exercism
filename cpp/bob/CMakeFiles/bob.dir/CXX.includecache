@@ -7,11 +7,15 @@
 #IncludeRegexTransform: 
 
 /Users/dsucksto/Documents/Exercism/cpp/bob/bob.cpp
+string
+-
 bob.h
 /Users/dsucksto/Documents/Exercism/cpp/bob/bob.h
 regex
 -
 string
+-
+algorithm
 -
 
 /Users/dsucksto/Documents/Exercism/cpp/bob/bob.h
