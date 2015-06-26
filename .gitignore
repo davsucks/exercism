@@ -1,1 +1,4 @@
+# C++ related ignores
 cpp/*/CMakeFiles
+cpp/*/cmake_install.cmake
+cpp/*/CMakeCache.txt
