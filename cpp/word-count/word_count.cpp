@@ -8,11 +8,11 @@
 using namespace std;
 
 string remove_punctuation_from(const string& input) {
-    string result;
-    remove_copy_if(input.begin(), input.end(),            
-                   back_inserter(result), //Store output           
+    string result(regex_replace(input, regex(","), ", ")), empty_string;
+    remove_copy_if(result.begin(), result.end(),            
+                   back_inserter(empty_string), //Store output           
                    [](char c) { return ispunct(c); });
-    return result;
+    return empty_string;
 }
 
 string normalize_spaces(const string& input) {
