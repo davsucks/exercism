@@ -16,7 +16,8 @@ string remove_punctuation_from(const string& input) {
 }
 
 string normalize_spaces(const string& input) {
-    return regex_replace(input, regex("[' ']{2,}"), " ");
+    string temp(regex_replace(input, regex("\\\n"), " "));
+    return regex_replace(temp, regex("[' ']{2,}"), " ");
 }
 
 string normalize_case(const string& input) {
