@@ -1,0 +1,4 @@
+(load-file "bob_test.clj")
+exit
+(count "some")
+exit
