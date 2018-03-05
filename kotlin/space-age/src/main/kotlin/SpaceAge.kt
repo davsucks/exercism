@@ -3,7 +3,7 @@ import java.math.RoundingMode
 
 val EARTH_YEAR_IN_SECONDS = 31_557_600L
 
-enum class Planets(period: Double) {
+enum class Planets(oribitalPeriodInEarthYears: Double) {
     Earth(1.0),
     Mercury(0.2408467),
     Venus(0.61519726),
@@ -13,18 +13,19 @@ enum class Planets(period: Double) {
     Uranus(84.016846),
     Neptune(164.79132);
 
-    var periodInSeconds: Double = period * EARTH_YEAR_IN_SECONDS
+    var periodInSeconds: Double = oribitalPeriodInEarthYears * EARTH_YEAR_IN_SECONDS
 }
 
 class SpaceAge(private val age: Long) {
-    fun onEarth(): Double = (age / Planets.Earth.periodInSeconds).roundToTwoDecimalPlaces()
-    fun onMercury(): Double = (age / Planets.Mercury.periodInSeconds).roundToTwoDecimalPlaces()
-    fun onVenus(): Double = (age / Planets.Venus.periodInSeconds).roundToTwoDecimalPlaces()
-    fun onMars(): Double = (age / Planets.Mars.periodInSeconds).roundToTwoDecimalPlaces()
-    fun onJupiter(): Double = (age / Planets.Jupiter.periodInSeconds).roundToTwoDecimalPlaces()
-    fun onSaturn(): Double = (age / Planets.Saturn.periodInSeconds).roundToTwoDecimalPlaces()
-    fun onUranus(): Double = (age / Planets.Uranus.periodInSeconds).roundToTwoDecimalPlaces()
-    fun onNeptune(): Double = (age / Planets.Neptune.periodInSeconds).roundToTwoDecimalPlaces()
+    fun onEarth(): Double = calculateAge(Planets.Earth)
+    fun onMercury(): Double = calculateAge(Planets.Mercury)
+    fun onVenus(): Double = calculateAge(Planets.Venus)
+    fun onMars(): Double = calculateAge(Planets.Mars)
+    fun onJupiter(): Double = calculateAge(Planets.Jupiter)
+    fun onSaturn(): Double = calculateAge(Planets.Saturn)
+    fun onUranus(): Double = calculateAge(Planets.Uranus)
+    fun onNeptune(): Double = calculateAge(Planets.Neptune)
+    private fun calculateAge(planet: Planets) = (age / planet.periodInSeconds).roundToTwoDecimalPlaces()
 }
 
 fun Double.roundToTwoDecimalPlaces(): Double {
