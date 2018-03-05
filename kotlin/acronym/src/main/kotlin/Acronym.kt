@@ -1,7 +1,9 @@
 class Acronym {
     companion object {
-        fun generate(phrase: String): String = phrase.split(' ', '-').map {
-                it.trim().capitalize().take(1)
-            }.joinToString("")
+        fun generate(phrase: String): String = phrase
+                .split(' ', '-')
+                .joinToString("") {
+                    it.trim().capitalize().take(1)
+                }
     }
 }
