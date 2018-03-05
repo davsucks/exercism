@@ -1,21 +1,32 @@
 import java.math.BigDecimal
 import java.math.RoundingMode
 
+val EARTH_YEAR_IN_SECONDS = 31_557_600L
+
+enum class Planets(period: Double) {
+    Earth(1.0),
+    Mercury(0.2408467),
+    Venus(0.61519726),
+    Mars(1.8808158),
+    Jupiter(11.862615),
+    Saturn(29.447498),
+    Uranus(84.016846),
+    Neptune(164.79132);
+
+    var periodInSeconds: Double = period * EARTH_YEAR_IN_SECONDS
+}
+
 class SpaceAge(private val age: Long) {
-    fun onEarth(): Double = onEarthBeforeRounding().roundToTwoDecimalPlaces()
-    fun onMercury(): Double = onEarthBeforeRounding().div(0.2408467).roundToTwoDecimalPlaces()
-    fun onVenus(): Double = onEarthBeforeRounding().div(0.61519726).roundToTwoDecimalPlaces()
-    fun onMars(): Double = onEarthBeforeRounding().div(1.8808158).roundToTwoDecimalPlaces()
-    fun onJupiter(): Double = onEarthBeforeRounding().div(11.862615).roundToTwoDecimalPlaces()
-    fun onSaturn(): Double = onEarthBeforeRounding().div(29.447498).roundToTwoDecimalPlaces()
-    fun onUranus(): Double = onEarthBeforeRounding().div(84.016846).roundToTwoDecimalPlaces()
-    fun onNeptune(): Double = onEarthBeforeRounding().div(164.79132).roundToTwoDecimalPlaces()
+    fun onEarth(): Double = (age / Planets.Earth.periodInSeconds).roundToTwoDecimalPlaces()
+    fun onMercury(): Double = (age / Planets.Mercury.periodInSeconds).roundToTwoDecimalPlaces()
+    fun onVenus(): Double = (age / Planets.Venus.periodInSeconds).roundToTwoDecimalPlaces()
+    fun onMars(): Double = (age / Planets.Mars.periodInSeconds).roundToTwoDecimalPlaces()
+    fun onJupiter(): Double = (age / Planets.Jupiter.periodInSeconds).roundToTwoDecimalPlaces()
+    fun onSaturn(): Double = (age / Planets.Saturn.periodInSeconds).roundToTwoDecimalPlaces()
+    fun onUranus(): Double = (age / Planets.Uranus.periodInSeconds).roundToTwoDecimalPlaces()
+    fun onNeptune(): Double = (age / Planets.Neptune.periodInSeconds).roundToTwoDecimalPlaces()
+}
 
-    private fun onEarthBeforeRounding() = this.age.toDouble() / EARTH_YEAR_IN_SECONDS.toDouble()
-
-    private fun Double.roundToTwoDecimalPlaces(): Double {
-        return BigDecimal(this).setScale(2, RoundingMode.HALF_UP).toDouble()
-    }
-
-    private val EARTH_YEAR_IN_SECONDS = 31_557_600L
+fun Double.roundToTwoDecimalPlaces(): Double {
+    return BigDecimal(this).setScale(2, RoundingMode.HALF_UP).toDouble()
 }
