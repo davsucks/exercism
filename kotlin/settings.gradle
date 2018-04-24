@@ -1,0 +1,6 @@
+include 'acronym'
+include 'gigasecond'
+include 'hamming'
+include 'hello-world'
+include 'pangram'
+include 'raindrops'
