@@ -5,7 +5,7 @@ class HandshakeCalculator {
                 .toBinary()
                 .reversed()
                 .asIterable()
-                .zip(Signal.values()) { char, signal -> if (char == '1') signal else Signal.NULL }
+                .zip(Signal.values()) { bit, signal -> if (bit.isActive()) signal else Signal.NULL }
                 .filterNot { Signal.NULL == it }
                 .branch(
                     predicate = { it.contains(Signal.REVERSE) },
@@ -13,9 +13,7 @@ class HandshakeCalculator {
                     rightOperation = { it })
         }
 
-        fun Int.toBinary(): String {
-            return this.toString(2)
-        }
+        fun Int.toBinary(): String = this.toString(2)
 
         private fun List<Signal>.branch(
             predicate: (List<Signal>) -> Boolean,
@@ -24,5 +22,7 @@ class HandshakeCalculator {
         ): List<Signal> {
             return if (predicate(this)) leftOperation(this) else rightOperation(this)
         }
+
+        private fun Char.isActive(): Boolean = this == '1'
     }
 }
