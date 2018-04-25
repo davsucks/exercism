@@ -19,9 +19,7 @@ class HandshakeCalculator {
             predicate: (List<Signal>) -> Boolean,
             leftOperation: (List<Signal>) -> List<Signal>,
             rightOperation: (List<Signal>) -> List<Signal>
-        ): List<Signal> {
-            return if (predicate(this)) leftOperation(this) else rightOperation(this)
-        }
+        ): List<Signal> = if (predicate(this)) leftOperation(this) else rightOperation(this)
 
         private fun Char.isActive(): Boolean = this == '1'
     }
