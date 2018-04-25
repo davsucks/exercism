@@ -1,22 +1,14 @@
 class HandshakeCalculator {
     companion object {
         fun calculateHandshake(input: Int): List<Signal> {
-            return input.toBinary().reversed().foldIndexed(listOf()) { index, acc, char ->
-                if (char == '1') {
-                    val signal = when(index) {
-                        0 -> Signal.WINK
-                        1 -> Signal.DOUBLE_BLINK
-                        2 -> Signal.CLOSE_YOUR_EYES
-                        3 -> Signal.JUMP
-                        4 -> Signal.REVERSE
-                        else -> return listOf()
-                    }
-                    if (signal == Signal.REVERSE) {
-                        return@foldIndexed acc.reversed()
-                    }
-                    return@foldIndexed acc + signal
-                }
-                return@foldIndexed acc
+            val returnValue = input.toBinary().reversed().asIterable()
+                .zip(Signal.values()) { a: Char, b: Signal ->
+                    return@zip if (a == '1') b else Signal.NULL
+                }.filterNot { Signal.NULL == it }
+            return if (returnValue.contains(Signal.REVERSE)) {
+                returnValue.minus(Signal.REVERSE).reversed()
+            } else {
+                returnValue
             }
         }
 
