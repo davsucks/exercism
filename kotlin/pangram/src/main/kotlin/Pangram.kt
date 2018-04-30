@@ -1,15 +1,8 @@
 object Pangram {
-    private val expected = ('a'..'z').joinToString("")
-    fun isPangram(test: String): Boolean {
-        val actual = test
-            .toSet()
-            .filter { it.isLetter() }
-            .sorted()
-            .joinToString("")
-            .toLowerCase()
-            .toSet()
-            .sorted()
-            .joinToString("")
-        return actual == expected
-    }
+    private const val alphabetSize = 26
+    fun isPangram(test: String): Boolean = test
+        .toLowerCase()
+        .toSet()
+        .filter { it.isLetter() }
+        .size == alphabetSize
 }
