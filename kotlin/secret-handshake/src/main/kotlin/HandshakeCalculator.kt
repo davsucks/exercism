@@ -15,11 +15,11 @@ class HandshakeCalculator {
 
         fun Int.toBinary(): String = this.toString(2)
 
-        private fun List<Signal>.branch(
-            predicate: (List<Signal>) -> Boolean,
-            leftOperation: (List<Signal>) -> List<Signal>,
-            rightOperation: (List<Signal>) -> List<Signal>
-        ): List<Signal> = if (predicate(this)) leftOperation(this) else rightOperation(this)
+        private fun <T> T.branch(
+            predicate: (T) -> Boolean,
+            leftOperation: (T) -> T,
+            rightOperation: (T) -> T
+        ): T = if (predicate(this)) leftOperation(this) else rightOperation(this)
 
         private fun Char.isActive(): Boolean = this == '1'
     }
