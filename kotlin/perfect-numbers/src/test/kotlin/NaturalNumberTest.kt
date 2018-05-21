@@ -70,4 +70,13 @@ class NaturalNumberTest {
         classify(-1)
     }
 
+    @Test
+    fun factorizesSix() {
+        assertEquals(listOf(1, 2, 3), 6.factorize())
+    }
+
+    @Test
+    fun factorizesTwenty() {
+        assertEquals(listOf(1, 2, 4, 5, 10), 20.factorize())
+    }
 }
