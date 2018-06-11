@@ -17,11 +17,17 @@ object Luhn {
     private fun Int.isOdd(): Boolean = this % 2 == 1
     private fun Int.isDivisibleByTen(): Boolean = this % 10 == 0
     private fun List<Int>.doubleEveryOtherDigit(): List<Int> = this.mapIndexed { index, i ->
-        if (index.isOdd()) {
-            val doubled = i * 2
-            if (doubled > 9) return@mapIndexed doubled - 9
-            else return@mapIndexed doubled
-        } else return@mapIndexed i
+        return@mapIndexed when {
+            index.isOdd() -> i.singleDigitDouble()
+            else -> i
+        }
+    }
+    private fun Int.singleDigitDouble(): Int {
+        val doubled = this * 2
+        return when {
+            doubled > 9 -> doubled - 9
+            else -> doubled
+        }
     }
 }
 
