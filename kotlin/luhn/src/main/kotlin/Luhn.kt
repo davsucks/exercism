@@ -1,10 +1,10 @@
 object Luhn {
     fun isValid(input: String): Boolean {
         val filteredInput = input.filterNot(Char::isWhitespace)
-        if (filteredInput.length < 2) return false
-        if (filteredInput.any { it.isNotDigit() }) return false
-        else {
-            return filteredInput
+        return when {
+            filteredInput.length < 2 -> false
+            filteredInput.any { it.isNotDigit() } -> false
+            else -> filteredInput
                     .map(Character::getNumericValue)
                     .reversed()
                     .reduceIndexed { index: Int, acc: Int, i: Int ->
