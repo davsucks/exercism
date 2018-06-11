@@ -7,18 +7,21 @@ object Luhn {
             else -> filteredInput
                     .map(Character::getNumericValue)
                     .reversed()
-                    .reduceIndexed { index: Int, acc: Int, i: Int ->
-                        if (index.isOdd()) {
-                            val iDoubled = i * 2
-                            if (iDoubled > 9) return@reduceIndexed acc + (iDoubled - 9)
-                            else return@reduceIndexed acc + iDoubled
-                        } else return@reduceIndexed acc + i
-                    }.isDivisibleByTen()
+                    .doubleEveryOtherDigit()
+                    .sum()
+                    .isDivisibleByTen()
         }
     }
 
     private fun Char.isNotDigit(): Boolean = !this.isDigit()
     private fun Int.isOdd(): Boolean = this % 2 == 1
     private fun Int.isDivisibleByTen(): Boolean = this % 10 == 0
+    private fun List<Int>.doubleEveryOtherDigit(): List<Int> = this.mapIndexed { index, i ->
+        if (index.isOdd()) {
+            val doubled = i * 2
+            if (doubled > 9) return@mapIndexed doubled - 9
+            else return@mapIndexed doubled
+        } else return@mapIndexed i
+    }
 }
 
