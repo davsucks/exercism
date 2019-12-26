@@ -10,10 +10,10 @@ defmodule RNATranscription do
   @spec to_rna([char]) :: [char]
   def to_rna(dna) do
     lookup = %{
-      71 => 67, 
-      67 => 71, 
-      84 => 65, 
-      65 => 85
+      ?G => ?C, 
+      ?C => ?G, 
+      ?T => ?A, 
+      ?A => ?U
     }
     Enum.map(dna, fn(x) -> lookup[x] end)
   end
