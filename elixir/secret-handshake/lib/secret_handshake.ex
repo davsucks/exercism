@@ -15,5 +15,32 @@ defmodule SecretHandshake do
   """
   @spec commands(code :: integer) :: list(String.t())
   def commands(code) do
+    list =
+      Integer.digits(code, 2)
+      |> Enum.reverse()
+      |> Enum.with_index()
+      |> Enum.map(fn {bit, idx} ->
+        if bit == 0 do
+          nil
+        else
+          case idx do
+            0 -> "wink"
+            1 -> "double blink"
+            2 -> "close your eyes"
+            3 -> "jump"
+            4 -> "reverse"
+            _ -> nil
+          end
+        end
+      end)
+      |> Enum.filter(fn itm -> itm != nil end)
+
+    if Enum.member?(list, "reverse") do
+      reversed = Enum.reverse(list)
+      [_ | rest] = reversed
+      rest
+    else
+      list
+    end
   end
 end
