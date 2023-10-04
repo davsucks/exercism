@@ -1,6 +1,8 @@
 defmodule BirdCount do
-  def today(list) do
-    List.first(list, nil)
+  def today([]), do: nil
+
+  def today([today | _]) do
+    today
   end
 
   def increment_day_count([]), do: [1]
@@ -10,8 +12,11 @@ defmodule BirdCount do
     [today + 1 | rest]
   end
 
-  def has_day_without_birds?(list) do
-    Enum.any?(list, &(&1 == 0))
+  def has_day_without_birds?([]), do: false
+  def has_day_without_birds?([0 | _]), do: true
+
+  def has_day_without_birds?([_ | rest]) do
+    false || has_day_without_birds?(rest)
   end
 
   def total([]), do: 0
