@@ -31,7 +31,7 @@ defmodule BirdCount do
     1 + busy_days(rest)
   end
 
-  def busy_days([today | rest]) do
+  def busy_days([_ | rest]) do
     busy_days(rest)
   end
 end
